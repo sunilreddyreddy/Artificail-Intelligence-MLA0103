@@ -20,3 +20,12 @@ End While
 4.If neighbor is not visited
 5.Call DFS(G, neighbor)
 End For
+
+3.UCS PSEUDO CODE
+
+1.Initialize a priority queue.
+2.Insert the start node with cost 0.
+3.Remove the node with the smallest cost.
+4.If it is the goal node, stop.
+5.Otherwise, add all unvisited neighbors with updated costs.
+6.Repeat until the goal is found
