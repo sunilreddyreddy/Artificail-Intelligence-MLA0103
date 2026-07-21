@@ -1,31 +1,106 @@
 1.BFS PSEUDO CODE
-
-1.Create an empty queue Q
-2.Mark start as visited
-3.Enqueue start into Q
-4.While Q is not empty
-5.vertex ← Dequeue(Q)
-6.Print vertex
-7.For each neighbor of vertex
-8.If neighbor is not visited
-9.Mark neighbor as visited
-10.Enqueue neighbor into Q
-End While
+BEGIN
+Create an empty Queue Q
+Mark start node as visited
+Enqueue(start)
+WHILE Q is not empty DO
+    node ← Dequeue(Q)
+    Print node
+    FOR each neighbor of node DO
+        IF neighbor is not visited THEN
+            Mark neighbor as visited
+            Enqueue(neighbor)
+        END IF
+    END FOR
+END WHILE
+END
 
 2.DFS PSEUDO CODE
-
-1.Mark vertex as visited
-2.Print vertex
-3.For each neighbor of vertex
-4.If neighbor is not visited
-5.Call DFS(G, neighbor)
-End For
+BEGIN
+Mark current node as visited
+Print current node
+FOR each neighbor of current node DO
+    IF neighbor is not visited THEN
+        DFS(neighbor)
+    END IF
+END FOR
+END
 
 3.UCS PSEUDO CODE
+BEGIN
+Create a Priority Queue PQ
+Insert start node with cost 0
+WHILE PQ is not empty DO
+    Remove node with minimum cost
+    IF node is goal THEN
+        Print total cost
+        STOP
+    END IF
+    FOR each neighbor of node DO
+        Calculate new cost
+        Insert neighbor with new cost into PQ
+    END FOR
+END WHILE
+END
 
-1.Initialize a priority queue.
-2.Insert the start node with cost 0.
-3.Remove the node with the smallest cost.
-4.If it is the goal node, stop.
-5.Otherwise, add all unvisited neighbors with updated costs.
-6.Repeat until the goal is found
+4.A* Search
+BEGIN
+Create a priority queue PQ
+Insert start node into PQ
+WHILE PQ is not empty DO
+    Remove node with minimum f(n)
+    IF node = goal THEN
+        Print node
+        STOP
+    END IF
+    FOR each neighbor DO
+        f(n) = g(n) + h(n)
+        Insert neighbor into PQ
+    END FOR
+END WHILE
+END
+
+5.Greedy Best-First Search (GBFS)
+BEGIN
+Create a priority queue PQ
+Insert start node into PQ using heuristic value
+WHILE PQ is not empty DO
+    Remove node with smallest heuristic value
+    Print node
+    IF node = goal THEN
+        STOP
+    END IF
+    FOR each unvisited neighbor DO
+        Insert neighbor into PQ
+    END FOR
+END WHILE
+END
+
+6.Min-Max
+FUNCTION MINIMAX(node, depth, isMax)
+IF node is terminal OR depth = 0 THEN
+    RETURN node value
+END IF
+IF isMax THEN
+    best = -∞
+    FOR each child of node DO
+        best = MAX(best, MINIMAX(child, depth-1, FALSE))
+    END FOR
+    RETURN best
+ELSE
+    best = +∞
+    FOR each child of node DO
+        best = MIN(best, MINIMAX(child, depth-1, TRUE))
+    END FOR
+    RETURN best
+END IF
+END FUNCTION
+
+7.Alpha-Beta Pruning
+BEGIN
+Apply Min-Max
+Update Alpha and Beta values
+IF Alpha ≥ Beta
+    Prune remaining branches
+Return best value
+END
